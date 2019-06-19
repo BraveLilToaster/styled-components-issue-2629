@@ -1,21 +1,26 @@
 import React from "react"
-import { Link } from "gatsby"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import useMedia from "../hooks/useMedia.js"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const IndexPage = () => {
+  const color = useMedia(["(min-width: 900px)"], ["green"], "red")
+
+  return (
+    <Layout>
+      <SEO title="test" />
+      <p>color: {color}</p>
+      <ColorBox color={color}>
+        <h1>box should be green on screens larger than 900px</h1>
+      </ColorBox>
+    </Layout>
+  )
+}
+
+const ColorBox = styled.div`
+  background-color: ${props => props.color};
+`
 
 export default IndexPage
